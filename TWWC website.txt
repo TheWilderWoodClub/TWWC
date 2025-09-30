@@ -29,6 +29,17 @@
         .section-padding {
             padding: 8rem 0;
         }
+        /* Custom styles for the lightbox modal */
+        #imageModal {
+            pointer-events: none; /* Initially allow clicks to pass through */
+        }
+        #imageModal.active {
+            opacity: 1;
+            pointer-events: auto; /* Enable interaction when active */
+        }
+        #modalImage.active {
+             transform: scale(1);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -45,11 +56,18 @@
     <header class="bg-wilder-green text-white py-4 shadow-lg">
         <div class="container mx-auto flex justify-between items-center px-6">
             <nav class="w-full text-center">
-                <a href="#about" class="text-white hover:text-gray-200 mx-4">About</a>
-                <a href="#mission" class="text-white hover:text-gray-200 mx-4">Mission</a>
+                <a href="#about" class="text-white hover:text-gray-200 mx-4">About us</a>
                 <a href="#school-bookings" class="text-white hover:text-gray-200 mx-4">School Bookings</a>
+                <!-- Group Bookings Tab -->
+                <a href="#group-bookings" class="text-white hover:text-gray-200 mx-4">Group Bookings</a>
+                <!-- New: Family Forest School Tab -->
+                <a href="#family-forest-school" class="text-white hover:text-gray-200 mx-4">Family Forest School</a>
                 <a href="#parties" class="text-white hover:text-gray-200 mx-4">Parties</a>
                 <a href="#wilder-tots" class="text-white hover:text-gray-200 mx-4">Wilder Tots</a>
+                <!-- New: Holiday Clubs Tab -->
+                <a href="#holiday-clubs" class="text-white hover:text-gray-200 mx-4">Holiday Clubs</a>
+                <!-- New: CPD Tab -->
+                <a href="#cpd" class="text-white hover:text-gray-200 mx-4">CPD</a>
                 <a href="#gallery" class="text-white hover:text-gray-200 mx-4">Gallery</a>
                 <a href="#contact" class="text-white hover:text-gray-200 mx-4">Contact</a>
             </nav>
@@ -74,66 +92,95 @@
                 </div>
                 <div class="w-full md:w-1/2 text-center md:text-left">
                     <h3 class="text-4xl font-bold text-wilder-green mb-4">What We Do</h3>
-                    <p class="text-lg leading-relaxed text-gray-700">The Wilder Wood Club is a place for children to learn and grow through nature-based play and exploration. We believe in fostering creativity, resilience, and a deep connection to the natural world. Our activities include forest art, mud kitchen play, shelter building, and so much more!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Mission Section -->
-    <section id="mission" class="section-padding bg-white">
-        <div class="container mx-auto px-6 max-w-4xl text-center">
-            <h3 class="text-4xl font-bold text-wilder-green mb-6">Our Mission</h3>
-            <p class="text-xl italic leading-relaxed text-gray-600 mb-8">"We are passionate about promoting opportunities to get children outside and sharing our love for the great outdoors and its many benefits!"</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-md transform hover:shadow-lg transition-shadow duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-wilder-green mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 12c-2.2 0-4-1.8-4-4S11.8 4 14 4s4 1.8 4 4c0 2.2-1.8 4-4 4z"/><path d="M8 10V2H2v8c0 4.4 3.6 8 8 8"/></svg>
-                    <h4 class="text-xl font-bold mb-2">Explore</h4>
-                    <p class="text-gray-600">Encouraging curiosity and free-range play.</p>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-md transform hover:shadow-lg transition-shadow duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-wilder-green mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <h4 class="text-xl font-bold mb-2">Nurture</h4>
-                    <p class="text-gray-600">Providing a safe and supportive environment.</p>
-                </div>
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-md transform hover:shadow-lg transition-shadow duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-wilder-green mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/><path d="M10 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/><path d="M7 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z"/></svg>
-                    <h4 class="text-xl font-bold mb-2">Grow</h4>
-                    <p class="text-gray-600">Helping children build confidence and skills.</p>
+                    <p class="text-lg leading-relaxed text-gray-700">The Wilder Wood Club is a place for children to learn and grow through nature-based play and exploration. We believe in fostering creativity, resilience, and a deep connection to the natural world. Our activities include tool use, woodland crafts, mud and water play, den building, fire lighting and so much more!</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- School Bookings Section -->
-    <section id="school-bookings" class="section-padding bg-gray-100">
+    <section id="school-bookings" class="section-padding bg-white">
         <div class="container mx-auto px-6 max-w-4xl text-center">
             <h3 class="text-4xl font-bold text-wilder-green mb-6">School Bookings</h3>
-            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">We offer bespoke forest school sessions for schools and educational groups. Our programs are designed to complement the national curriculum, providing a unique outdoor classroom experience that promotes teamwork, problem-solving, and a deeper connection to nature. Contact us to discuss how we can tailor a session for your students.</p>
-            <a href="https://bookwhen.com/thewilderwoodclub?fbclid=PAb21jcAM78eVleHRuA2FlbQIxMQABp01Kty4Ixh4pbMnCUQjC0knuXjjSVqSaC3D4ulomxhXtBGdePO9za33SmkWi_aem_QibxJdUs2yhoV2-jw501uw" target="_blank" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">Book a School Visit</a>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">We offer bespoke forest school sessions for schools and educational groups. Our programs can be designed around the forest school pedgogy or to complement a national curriculum link, providing a unique outdoor classroom experience that promotes teamwork, problem-solving, and a deeper connection to nature. Contact us to discuss how we can tailor a session for your students.</p>
+            <!-- UPDATED: Changed link to mailto: for school booking inquiries -->
+            <a href="mailto:thewilderwoodclub@gmail.com?subject=Enquiry%20for%20School%20Forest%20Booking" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">Book a School Visit</a>
         </div>
     </section>
 
-    <!-- Parties Section -->
-    <section id="parties" class="section-padding bg-white">
+    <!-- Group Bookings Section -->
+    <section id="group-bookings" class="section-padding bg-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h3 class="text-4xl font-bold text-wilder-green mb-6">Group Bookings & Corporate Events</h3>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Looking for a fun outing for a large non-school group? We can host bespoke sessions for youth clubs, corporate teams, or community groups. Our woodland setting provides a fantastic, refreshing environment for collaboration, relaxation, and hands-on activities tailored to your group's goals.</p>
+            <!-- UPDATED: Changed link to mailto: for group booking inquiries -->
+            <a href="mailto:thewilderwoodclub@gmail.com?subject=Enquiry%20for%20Group%20or%20Corporate%20Booking" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">Enquire about Group Booking</a>
+        </div>
+    </section>
+
+    <!-- New: Family Forest School Section -->
+    <section id="family-forest-school" class="section-padding bg-white">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h3 class="text-4xl font-bold text-wilder-green mb-6">Family Forest School</h3>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Spend quality time together in nature with our Family Forest School sessions. These sessions encourage shared experiences, natural play, and skill development for both children and adults. It's the perfect opportunity to unplug, reconnect, and learn alongside your children in a safe, inspiring outdoor environment.</p>
+            <a href="https://bookwhen.com/thewilderwoodclub?fbclid=PAb21jcAM78eVleHRuA2FlbQIxMQABp01Kty4Ixh4pbMnCUQjC0knuXjjSVqSaC3D4ulomxhXtBGdePO9za33SmkWi_aem_QibxJdUs2yhoV2-jw501uw" target="_blank" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">View Family Sessions</a>
+        </div>
+    </section>
+
+    <!-- Parties Section - Background changed to gray for alternating pattern -->
+    <section id="parties" class="section-padding bg-gray-100">
         <div class="container mx-auto px-6 max-w-4xl text-center">
             <h3 class="text-4xl font-bold text-wilder-green mb-6">Wilder Wood Parties</h3>
-            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Give your child an unforgettable birthday party in the heart of the woods! Our nature-themed parties are filled with adventure, from den building and bug hunting to campfire cooking and forest crafts. We work with you to create a magical and memorable day that your child and their friends will never forget.</p>
-            <a href="https://bookwhen.com/thewilderwoodclub?fbclid=PAb21jcAM78eVleHRuA2FlbQIxMQABp01Kty4Ixh4pbMnCUQjC0knuXjjSVqSaC3D4ulomxhXtBGdePO9za33SmkWi_aem_QibxJdUs2yhoV2-jw501uw" target="_blank" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">Plan a Party</a>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Give your child an unforgettable birthday party in the heart of the woods! Our themed parties are filled with adventure, from den building and bug hunting to campfire cooking and forest crafts. We work with you to create a magical and memorable day that your child and their friends will never forget!</p>
+
+            <!-- Flyer Display Area: Two flyers that open a modal on click -->
+            <div class="flex flex-col sm:flex-row justify-center space-y-6 sm:space-y-0 sm:space-x-8 mb-10">
+                <!-- Flyer 1 -->
+                <a href="#" onclick="openModal('https://placehold.co/400x600/6B8E23/ffffff?text=Party+Flyer+A'); return false;" class="group block w-full sm:w-1/2 md:w-5/12 lg:w-4/12 cursor-pointer transition-shadow duration-300 hover:shadow-2xl rounded-xl">
+                    <img src="https://placehold.co/400x600/6B8E23/ffffff?text=Party+Flyer+A" alt="Themed Birthday Party Flyer A" class="w-full h-auto rounded-xl object-cover border-4 border-wilder-green group-hover:scale-[1.02] transition-transform duration-300">
+                    <p class="text-sm text-gray-600 mt-2 font-medium">Click to enlarge Flyer A (Example)</p>
+                </a>
+                <!-- Flyer 2 -->
+                <a href="#" onclick="openModal('https://placehold.co/400x600/8B4513/ffffff?text=Party+Flyer+B'); return false;" class="group block w-full sm:w-1/2 md:w-5/12 lg:w-4/12 cursor-pointer transition-shadow duration-300 hover:shadow-2xl rounded-xl">
+                    <img src="https://placehold.co/400x600/8B4513/ffffff?text=Party+Flyer+B" alt="Themed Birthday Party Flyer B" class="w-full h-auto rounded-xl object-cover border-4 border-wilder-green group-hover:scale-[1.02] transition-transform duration-300">
+                    <p class="text-sm text-gray-600 mt-2 font-medium">Click to enlarge Flyer B (Example)</p>
+                </a>
+            </div>
+
+            <!-- Email Booking Link -->
+            <a href="mailto:thewilderwoodclub@gmail.com?subject=Enquiry%20for%20Wilder%20Wood%20Party%20Booking" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">Plan a Party</a>
         </div>
     </section>
 
-    <!-- Wilder Tots Section -->
-    <section id="wilder-tots" class="section-padding bg-gray-100">
+    <!-- Wilder Tots Section - Background changed to white for alternating pattern -->
+    <section id="wilder-tots" class="section-padding bg-white">
         <div class="container mx-auto px-6 max-w-4xl text-center">
             <h3 class="text-4xl font-bold text-wilder-green mb-6">Wilder Tots Sessions</h3>
-            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">These sessions are specially designed for toddlers and their caregivers. Join us for a gentle introduction to forest school activities, including sensory play, nature walks, songs, and stories. It's a wonderful opportunity for little ones to explore and for grown-ups to connect with other families in a calm, natural setting.</p>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">These sessions are specially designed for toddlers and their caregivers. Join us for a gentle introduction to forest school activities, including sensory play, woodland crafts, songs, and stories. It's a wonderful opportunity for little ones to explore and for grown-ups to connect with other families in a calm, natural setting.</p>
             <a href="https://bookwhen.com/thewilderwoodclub?fbclid=PAb21jcAM78eVleHRuA2FlbQIxMQABp01Kty4Ixh4pbMnCUQjC0knuXjjSVqSaC3D4ulomxhXtBGdePO9za33SmkWi_aem_QibxJdUs2yhoV2-jw501uw" target="_blank" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">Join Wilder Tots</a>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="section-padding bg-white">
+    <!-- New: Holiday Clubs Section (Inserted here) -->
+    <section id="holiday-clubs" class="section-padding bg-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h3 class="text-4xl font-bold text-wilder-green mb-6">Wilder Wood Holiday Clubs</h3>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">Keep the adventure going during school breaks with our popular Holiday Clubs! We offer full day sessions packed with seasonal forest school fun, tailored for children aged 5-11. Activities include advanced den building, cooking over an open fire, tool use, environmental games and more. It's the perfect way to spend the holidays outdoors.</p>
+            <a href="https://bookwhen.com/thewilderwoodclub?fbclid=PAb21jcAM78eVleHRuA2FlbQIxMQABp01Kty4Ixh4pbMnCUQjC0knuXjjSVqSaC3D4ulomxhXtBGdePO9za33SmkWi_aem_QibxJdUs2yhoV2-jw501uw" target="_blank" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">Find Club Dates & Book</a>
+        </div>
+    </section>
+
+    <!-- CPD Section (Background changed to white to alternate with Holiday Clubs) -->
+    <section id="cpd" class="section-padding bg-white">
+        <div class="container mx-auto px-6 max-w-4xl text-center">
+            <h3 class="text-4xl font-bold text-wilder-green mb-6">CPD & Staff Training</h3>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">We offer Continuing Professional Development (CPD) sessions and tailored training for educators and staff looking to integrate forest school principles into their practice. Learn about risk management, environmental education, and effective nature-based pedagogy to enrich your curriculum and inspire your students.</p>
+            <a href="#contact" class="btn-wilder px-8 py-4 rounded-full text-lg font-bold shadow-lg inline-block hover:shadow-xl">Enquire about Training</a>
+        </div>
+    </section>
+
+    <!-- Gallery Section (Background changed to gray to alternate with CPD) -->
+    <section id="gallery" class="section-padding bg-gray-100">
         <div class="container mx-auto px-6 text-center">
             <h3 class="text-4xl font-bold text-wilder-green mb-6">Our Gallery</h3>
             <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">A glimpse into our daily adventures at The Wilder Wood Club. We capture moments of discovery, laughter, and connection with nature.</p>
@@ -154,7 +201,7 @@
             <h3 class="text-4xl font-bold text-white mb-6">Get in Touch</h3>
             <p class="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">Ready to start the adventure? Contact us to learn more about our sessions, pricing, and availability. We can't wait to hear from you!</p>
             <div class="flex flex-col md:flex-row justify-center items-center md:space-x-8 space-y-8 md:space-y-0">
-                <!-- Book Now Button -->
+                <!-- Book Now Button (Still links to Bookwhen for general/quick bookings) -->
                 <a href="https://bookwhen.com/thewilderwoodclub?fbclid=PAb21jcAM78eVleHRuA2FlbQIxMQABp01Kty4Ixh4pbMnCUQjC0knuXjjSVqSaC3D4ulomxhXtBGdePO9za33SmkWi_aem_QibxJdUs2yhoV2-jw501uw" target="_blank" class="bg-white text-wilder-green px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transition-shadow duration-300">Book Now</a>
                 <!-- Social Media Links -->
                 <a href="https://www.facebook.com/profile.php?id=61572948868051" target="_blank" class="bg-white text-wilder-green p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -173,6 +220,50 @@
             <p>&copy; 2024 The Wilder Wood Club. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 transition-opacity duration-300 opacity-0 hidden" onclick="closeModal()">
+        <div class="relative max-w-4xl w-full h-full p-4 md:p-8 flex justify-center items-center" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-white text-4xl font-bold p-2 leading-none hover:text-gray-300 transition-colors duration-200" aria-label="Close image viewer">&times;</button>
+            <img id="modalImage" src="" alt="Enlarged Flyer" class="max-w-full max-h-full rounded-lg shadow-2xl transition-transform duration-300 transform scale-95">
+        </div>
+    </div>
+
+    <!-- JavaScript for Modal Functionality -->
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+
+        function openModal(imageUrl) {
+            modalImage.src = imageUrl;
+            // Show the modal
+            modal.classList.remove('hidden');
+            // Force reflow for transition
+            requestAnimationFrame(() => {
+                modal.classList.add('active');
+                modalImage.classList.add('active');
+            });
+        }
+
+        function closeModal() {
+            modalImage.classList.remove('active');
+            modal.classList.remove('active');
+
+            // Hide the modal after transition completes (300ms)
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalImage.src = '';
+            }, 300);
+        }
+
+        // Close modal when Escape key is pressed
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
 
 </body>
 </html>
